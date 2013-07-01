@@ -1,0 +1,23 @@
+{
+  "name": "imageeditor",
+  "version": "0.0.0",
+  "description": "A graphical image editor for the browser",
+  "main": "imageeditor.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "image",
+    "editor",
+    "gui",
+    "frontend",
+    "nodejs",
+    "browserify",
+    "greasemonkey"
+  ],
+  "author": "very",
+  "license": "MIT",
+  "dependencies": {
+    "canvas-browserify": "~1.0.3"
+  }
+}
