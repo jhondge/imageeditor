@@ -1,4 +1,4 @@
-var dom = require('./dom.js');
+var dom = require('verydom');
 var Canvas = require('canvas-browserify');
 var Events = require('./events.js');
 

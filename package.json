@@ -18,6 +18,7 @@
   "author": "very",
   "license": "MIT",
   "dependencies": {
-    "canvas-browserify": "~1.0.3"
+    "canvas-browserify": "~1.0.3",
+    "verydom": "git://github.com/very/verydom.git"
   }
 }

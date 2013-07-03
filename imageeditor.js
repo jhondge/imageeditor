@@ -1,4 +1,4 @@
-var dom = require('./dom.js'),
+var dom = require('verydom'),
 	make = dom.make;
 var Events = require('./events.js');
 var Viewer = require('./viewer.js');

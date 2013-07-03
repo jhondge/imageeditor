@@ -1,4 +1,4 @@
-var dom = require('./dom.js');
+var dom = require('verydom');
 var Events = require('./events.js');
 
 Toolbar.prototype.toString = function() {return 'Toolbar'};
