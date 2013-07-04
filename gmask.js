@@ -48,7 +48,7 @@ function GMask() {
    		size: 16
       },
       fl: {
-         negative: false,
+         neg: false,
          size: 8
       }
    };
@@ -309,7 +309,7 @@ function fl(buffer, s) {
          cache.ny = s.ny;
          cache.map = map;
       }
-      applyMap(buffer, s, map, cfg.neg);
+      applyMap(buffer, s, map, cfg.neg, true);
    }
 }
 
@@ -363,7 +363,7 @@ function getSelection(buffer, s, blocksize) {
 	};
 }
 
-function applyMap(buffer, s, map, negative) {
+function applyMap(buffer, s, map, neg, quirk) {
 	var canvas = new Canvas();
 	canvas.width = s.w;
 	canvas.height = s.h;
@@ -379,7 +379,7 @@ function applyMap(buffer, s, map, negative) {
 			s.size, s.size
 		);
 	}
-	if (negative) {
+	if (neg) {
       var id = ctx.getImageData(0, 0, s.w, s.h);
 		var data = id.data;
       for (var i = 0; i < data.length; i++) {
@@ -387,20 +387,23 @@ function applyMap(buffer, s, map, negative) {
          data[i] = 255 - data[i++];
          data[i] = 255 - data[i++];
       }
-      map.forEach(function(value, index) {
-         if (value === index) {
-            var i = value * s.size * s.size * 4;
-            for (var j = 0; j < s.size; j++) {
-               for (var k = 0; k < s.size; k++) {
-                  data[i] = 255 - data[i++];
-                  data[i] = 255 - data[i++];
-                  data[i] = 255 - data[i++];
-                  i++;
+      if (quirk) {
+         map.forEach(function(value, index) {
+            if (value === index) {
+               var col = index % s.nx;
+               var i = ((index - col) * s.size + col) * s.size * 4;
+               for (var j = 0; j < s.size; j++) {
+                  for (var k = 0; k < s.size; k++) {
+                     data[i] = 255 - data[i++];
+                     data[i] = 255 - data[i++];
+                     data[i] = 255 - data[i++];
+                     i++;
+                  }
+                  i += (s.nx - 1) * s.size * 4;
                }
-               i += (s.nx - 1) * s.size * 4;
             }
-         }
-      });
+         });
+      }
       buffer.putImageData(id, s.x, s.y);
 	} else {
       buffer.clearRect(s.x, s.y, s.w, s.h);
