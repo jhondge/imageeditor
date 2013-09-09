@@ -28,6 +28,7 @@ module.exports = Events;
       });
    });
    newspaper.observe(document, 'click');
+*/
 
 function Events() {
 
