@@ -10,6 +10,25 @@ Events.prototype.off = off;
 Events.prototype.fire = fire;
 module.exports = Events;
 
+/*
+   Use on/off to register event listeners.
+   Use fire to publish events.
+   Use observe/unobserve integrate DOM node events.
+   
+   Example:
+   var newspaper = new Events();
+   newspaper.on('article', function(article) {
+      console.log('article got published: ' + article.title);
+   });
+   newspaper.on('click', function(click_event) {
+      newspaper.fire({
+         type: 'article',
+         title: 'Someone Clicked on the Document',
+         text: 'Reportedly someone clicked on the document at ' + click_event.x + ',' + click_event.y + '.'
+      });
+   });
+   newspaper.observe(document, 'click');
+
 function Events() {
 
 }
